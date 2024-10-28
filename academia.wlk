@@ -26,12 +26,17 @@ object academia{
 		return muebles.filter( { mueble => mueble.sePuedeGuardar(cosa)})
 	}
 
-	method guardarEnMueble(cosa){
-		if(self.sePuedeGuardar(cosa)){
-
-		}
+	method guardarEnAcademia(cosa){
+		self.valiadrGuardarEnAcademina(cosa)
+			self.enDondeSePuedeGuardar(cosa).head().guardar(cosa)
 	}
 
+
+	method valiadrGuardarEnAcademina(cosa){
+		if(!self.sePuedeGuardar(cosa)){
+			self.error("No entra en la academia.")
+		}
+	}
 
 }
 
