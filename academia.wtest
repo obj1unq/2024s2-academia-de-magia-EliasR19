@@ -9,19 +9,19 @@ describe "Academia de Magia" {
 	 */
 
 	 //COSAS
-	const pelota = new Cosa(volumen = 3, marca = "cuchufliyo", esMagico = false, esReliquia = false) 
+	const pelota = new Cosa(volumen = 3, marca = cuchuflito, esMagico = false, esReliquia = false) 
 	// TODO: construir/obtener una cosa con volumen = 3, marca = cuchuflito, no es mágica ni una reliquia
 	
-	const escoba = new Cosa(volumen = 4, marca = "acme", esMagico = true, esReliquia = true)
+	const escoba = new Cosa(volumen = 4, marca = acme, esMagico = true, esReliquia = true)
 	// TODO: construir/obtener una cosa con volumen = 4, marca = acme, es mágica y una reliquia
 	
-	const varita = new Cosa(volumen = 1, marca = "fenix", esMagico = true, esReliquia = false) 
+	const varita = new Cosa(volumen = 1, marca = fenix, esMagico = true, esReliquia = false) 
 	// TODO: construir/obtener una cosa con volumen = 1, marca = fenix, es mágica pero no es una reliquia
 	
-	const pava = new Cosa(volumen = 2, marca = "acme", esMagico = false, esReliquia = true)
+	const pava = new Cosa(volumen = 2, marca = acme, esMagico = false, esReliquia = true)
 	// TODO: construir/obtener una cosa con volumen = 2, marca = acme, no es magica pero sí una reliquia
 
-	const lamparaAladino = new Cosa(volumen = 3, marca = "fenix", esMagico = true, esReliquia = true)
+	const lamparaAladino = new Cosa(volumen = 3, marca = fenix, esMagico = true, esReliquia = true)
 	// TODO: construir/obtener una cosa con volumen = 3, marca = fenix, es mágica y una reliquia
 
 	//MUEBLES
@@ -121,13 +121,13 @@ test "punto 1.1 saber si está guardado algo" {
 		academia.guardarEnAcademia(pava)
 		// TODO: Guardar la pava en la academia
 
-		academia.estaEnLaAcademia(pava)
+		academia.estaGuardado(pava)
 		// TODO: Verificar que la pava está guardada en la academia
 
-		academia.guardarEnAcademia(lamparaAladino)
+		academia.estaGuardado(lamparaAladino)
 		// TODO: Guardar la lámpara en la academia
 
-		academia.estaEnLaAcademia(lamparaAladino)
+		academia.estaGuardado(lamparaAladino)
 		// TODO: Verificar que la lámpara está guardada en la academia
 
 		assert.throwsException({ academia.guardarEnAcademia(escoba) })
@@ -152,24 +152,47 @@ test "punto 1.5 no poder guardar una cosa por culpa de que no hay mueble" {
  		// TODO: Verificar que la pava NO está guardada en la academia
 }
  
-/*
- * 	test "punto 2.1 utilidad" {
- * 		// TODO: Guardar la pava en el armario
- * 		// TODO: Guardar la lámpara en el gabinete mágico
- * 		var baulMagico = null // TODO: construir/obtener un baúl mágico con volumen máximo = 12 y con la escoba y la lámpara dentro
- * 		// TODO: Verificar que la utilidad del armario es 1.1
- * 		// TODO: Verificar que la utilidad del ganibete mágico es 3
- * 		// TODO: Verificar que la utilidad del baúl es 4
- * 		// TODO: Verificar que la utilidad del baúl mágico es 5
- * 	}
- */
-/*
- * 	test "punto 2.2 cosas menos utiles" {
- * 		// TODO: Guardar la pava en el armario
- * 		// TODO: Guardar la lámpara en el gabinete mágico
- * 		// TODO: Verificar que las cosas menos útiles en la academia son la pelota, la varita y la escoba
- * 	}
- */
+
+
+ 	test "punto 2.1 utilidad" {
+		armario.guardar(pava)
+ 		// TODO: Guardar la pava en el armario
+
+		gabineteMagico.guardar(lamparaAladino)
+ 		// TODO: Guardar la lámpara en el gabinete mágico
+
+ 		var baulMagico = new BaulMagico(volumenMax = 12) 
+		baulMagico.guardar(escoba)
+		baulMagico.guardar(lamparaAladino)
+		// TODO: construir/obtener un baúl mágico con volumen máximo = 12 y con la escoba y la lámpara dentro
+ 		
+		assert.equals(1.1, armario.utilidad())
+		// TODO: Verificar que la utilidad del armario es 1.1
+		
+		gabineteMagico.precio(6)
+		assert.equals(3, gabineteMagico.utilidad())
+ 		// TODO: Verificar que la utilidad del ganibete mágico es 3
+
+		assert.equals(4, baul.utilidad())
+ 		// TODO: Verificar que la utilidad del baúl es 4
+
+		assert.equals(5, baulMagico.utilidad())
+ 		// TODO: Verificar que la utilidad del baúl mágico es 5
+ 	}
+ 
+
+ 	test "punto 2.2 cosas menos utiles" {
+		armario.guardar(pava)
+ 		// TODO: Guardar la pava en el armario
+
+		gabineteMagico.guardar(lamparaAladino)
+ 		// TODO: Guardar la lámpara en el gabinete mágico
+
+		assert.equals(#{pelota, varita, escoba}, academia.cosasMenosUtilides())
+ 		// TODO: Verificar que las cosas menos útiles en la academia son la pelota, la varita y la escoba
+		// El set es por el orden
+	}
+ 
 /*
  * 	test "punto 2.3 marca de cosa menos util" {
  * 		// TODO: Guardar la pava en el armario
