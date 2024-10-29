@@ -213,7 +213,7 @@ test "punto 1.5 no poder guardar una cosa por culpa de que no hay mueble" {
 		gabineteMagico.guardar(lamparaAladino)
  		// TODO: Guardar la lámpara en el gabinete mágico
 
-		academia.tirarCosasMenosUtiles()
+		academia.tirarCosasMenosUtilesNoMagicas()
  		// TODO: Remover las cosas menos útiles de la academia que no son mágicas
 
 		assert.that(academia.estaGuardado(varita))
@@ -245,3 +245,13 @@ test "punto 1.5 no poder guardar una cosa por culpa de que no hay mueble" {
 
 // ANOTAR EN PAPEL
 // NO PODER COSAS COMO STRING :D
+
+/*
+cuando se sobreescribe un método en una clase que hereda de otra, para el self de la clase padre se toma ese ultimo override.
+
+busca en la clase que hereda y si el método no esta ahi, va a buscar a la clase padre. método LOOK UP.
+busca primero en lo ultimo a lo que le hiciste new.
+
+
+
+*/
