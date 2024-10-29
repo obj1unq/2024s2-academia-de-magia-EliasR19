@@ -1,6 +1,6 @@
 object academia{
 	var property muebles = []
-
+	
 
 	method estaGuardado(cosa){
 		return muebles.any({ mueble => mueble.estaDentro(cosa)})
@@ -33,6 +33,21 @@ object academia{
 
 	method cosasMenosUtilides(){
 		return muebles.map({ mueble => mueble.cosaMenosUtilDentro()}).asSet()
+	}
+
+	method marcaCosaMenosUtil(){
+		return self.cosasMenosUtilides().min({cosa => cosa.utilidad()}).marca()
+	}
+
+	method tirarCosasMenosUtiles(){
+		self.validarTirar()
+		muebles.forEach({ mueble => mueble.tirar(mueble.cosaMenosUtilDentro())})
+	}
+
+	method validarTirar(){
+		if(muebles.size() < 3){
+			self.error("No se puede tirar, no hay al menos 3 muebles")
+		}
 	}
 
 }
@@ -90,6 +105,14 @@ class Mueble {
 		self.validarGuardar(cosa)
 		cosasDentro.add(cosa)
 	}
+
+	method tirar(cosa){
+		if(!cosa.esMagico()){
+			cosasDentro.remove(cosa)
+		}
+
+	}
+
 	
 	method validarGuardar(cosa){
 		if(!self.sePuedeGuardar(cosa)){
