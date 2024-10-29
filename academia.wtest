@@ -71,13 +71,13 @@ test "punto 1.1 saber si está guardado algo" {
 
 
 	test "punto 1.2, saber en que mueble esta guardado algo" {
-		assert.equals([gabineteMagico], academia.estaEnMueble(varita))
+		assert.equals(gabineteMagico, academia.estaEnMueble(varita))
 		// TODO: Verificar que el mueble donde se guarda la varita está es el gabinete mágico
 		
-		assert.equals([armario], academia.estaEnMueble(pelota))
+		assert.equals(armario, academia.estaEnMueble(pelota))
 		// TODO: Verificar que el mueble donde se guarda la pelota está guardada es el armario
 		
-		assert.equals([baul], academia.estaEnMueble(escoba))
+		assert.equals(baul, academia.estaEnMueble(escoba))
 		// TODO: Verificar que el mueble donde se guarda la escoba está guardada es el baúl
 	}
 
@@ -109,10 +109,10 @@ test "punto 1.1 saber si está guardado algo" {
 
 	test "punto 1.4 saber en que muebles se puede guardar algo" {
 		
-		assert.equals([armario], academia.enDondeSePuedeGuardar(pava))
+		assert.equals(armario, academia.enDondeSePuedeGuardar(pava))
 		// TODO: Verificar que al preguntar en que muebles se puede guardar la pava se obtiene el armario
 
-		assert.equals([gabineteMagico, armario], academia.enDondeSePuedeGuardar(lamparaAladino))
+		assert.equals(gabineteMagico, academia.enDondeSePuedeGuardar(lamparaAladino))
 		// TODO: Verificar al preguntar en que muebles se puede guardar la lámpara se obtienen el armario y el gabinete mágico
 	}
 
@@ -237,7 +237,7 @@ test "punto 1.5 no poder guardar una cosa por culpa de que no hay mueble" {
 		academia.muebles([armario, baul])
  		// TODO: Hacer que la academia tenga solamente el armario y el baúl
 
-		assert.throwsException({ academia.tirarCosasMenosUtiles() })
+		assert.throwsException({ academia.tirarCosasMenosUtilesNoMagicas() })
  		// TODO: Remover las cosas menos útiles de la academia que no son mágicas (NO SE PUEDE!)
  	}
  

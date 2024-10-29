@@ -1,52 +1,62 @@
 object academia{
 	var property muebles = []
 
-
+    //PUNTO 1.1
 	method estaGuardado(cosa){
 		return muebles.any({ mueble => mueble.estaDentro(cosa)})
 	}
 
+    //PUNTO 1.2
 	method estaEnMueble(cosa){	// intentar con find
-		return muebles.filter({ mueble => mueble.estaDentro(cosa)})
+		return muebles.find({ mueble => mueble.estaDentro(cosa)})
 	}
 
+    //PUNTO 1.3
 	method sePuedeGuardar(cosa) {
 		return muebles.any({ mueble => mueble.sePuedeGuardar(cosa)}) && !self.estaGuardado(cosa)
 	}
 
-
+    //PUNTO 1.4
 	method enDondeSePuedeGuardar(cosa){
-		return muebles.filter( { mueble => mueble.sePuedeGuardar(cosa)})
+		return muebles.find( { mueble => mueble.sePuedeGuardar(cosa)})
 	}
 
+    //PUNTO 1.5
 	method guardarEnAcademia(cosa){
 		self.valiadrGuardarEnAcademina(cosa)
-			self.enDondeSePuedeGuardar(cosa).head().guardar(cosa)
+		self.enDondeSePuedeGuardar(cosa).guardar(cosa)
 	}
 
 
 	method valiadrGuardarEnAcademina(cosa){
 		if(!self.sePuedeGuardar(cosa)){
-			self.error("No entra en la academia.")
+		    self.error("No entra en la academia.")
 		}
 	}
 
+    //PUNTO 2.2
 	method cosasMenosUtilides(){
 		return muebles.map({ mueble => mueble.cosaMenosUtilDentro()}).asSet()
 	}
-
-	method marcaCosaMenosUtil(){ // ponerle subtarea
-		return self.cosasMenosUtilides().min({cosa => cosa.utilidad()}).marca()
+    
+    //PUNTO 2.3
+	method marcaCosaMenosUtil(){
+		return self.laCosaMenosUtil().marca()
 	}
 
-	method tirarCosasMenosUtiles(){
-		self.validarTirar()
-		muebles.forEach({ mueble => mueble.tirar(mueble.cosaMenosUtilDentro())})
-	}
+    method laCosaMenosUtil(){
+        return self.cosasMenosUtilides().min({cosa => cosa.utilidad()})
+    }
 
+    //PUNTO 2.4
 	method tirarCosasMenosUtilesNoMagicas(){
-		self.cosasMenosUtilides().filter({ c => !c.esMagico()}).forEach({cosa => self.tirar(cosa)})
+        self.validarTirar()
+		self.cosasNoMagicasDeMenosUtiles().forEach({cosa => self.tirar(cosa)})
 	}
+
+    method cosasNoMagicasDeMenosUtiles(){
+        return self.cosasMenosUtilides().filter({ cosa => !cosa.esMagico()})
+    }
 
 	method tirar(cosa){
 		self.estaEnMueble(cosa).tirar(cosa)
